@@ -13,8 +13,3 @@ export const fetchImages = async (page = 1, perPage = 12) => {
   });
   return response.data;
 };
-
-export const getImgById = async (id: string) => {
-  const response = await api.get(`/photos/${id}`);
-  return response.data;
-};

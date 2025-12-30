@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
-// import { fetchImages } from "../api/unsplash";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
-// import ImageModal from "../components/Modal/ImageModal";
+import ImageModal from "../components/Modal/ImageModal";
 import { fetchImages } from "../api/unsplash";
 // import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 
@@ -25,10 +24,10 @@ const Home = () => {
   return (
     <>
       <ImageGrid images={images} onImageClick={setSelectedImage} />
-      {/* <ImageModal
+      <ImageModal
         image={selectedImage}
         onClose={() => setSelectedImage(null)}
-      /> */}
+      />
     </>
   );
 };
