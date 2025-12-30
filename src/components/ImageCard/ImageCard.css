@@ -1,0 +1,16 @@
+.image-card {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.image-card img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.image-card img:hover {
+  transform: scale(1.02);
+}
