@@ -2,12 +2,12 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
 import ImageModal from "../components/Modal/ImageModal";
 import { fetchImages } from "../api/unsplash";
+import type { Image } from "../types/Image";
 
-const Home = () => {
-  const [images, setImages] = useState([]);
+const Home: React.FC = () => {
+  const [images, setImages] = useState<Image[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [selectedImage, setSelectedImage] =
-    useState(null);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const observerRef = useRef<HTMLDivElement | null>(null);
@@ -16,10 +16,15 @@ const Home = () => {
     if (loading) return;
 
     setLoading(true);
-    const newImages = await fetchImages(page);
-    setImages((prev) => [...prev, ...newImages]);
-    setPage((prev) => prev + 1);
-    setLoading(false);
+    try {
+      const newImages: Image[] = await fetchImages(page);
+      setImages((prev) => [...prev, ...newImages]);
+      setPage((prev) => prev + 1);
+    } catch (err) {
+      console.error("Failed to load images:", err);
+    } finally {
+      setLoading(false);
+    }
   }, [page, loading]);
 
   useEffect(() => {
@@ -53,10 +58,10 @@ const Home = () => {
 
       <div ref={observerRef} style={{ height: 1 }} />
 
-      <ImageModal
-        image={selectedImage}
-        onClose={() => setSelectedImage(null)}
-      />
+        <ImageModal
+          image={selectedImage}
+          onClose={() => setSelectedImage(null)}
+        />
     </>
   );
 };

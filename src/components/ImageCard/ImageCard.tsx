@@ -1,12 +1,14 @@
+import React from "react";
 import "./ImageCard.css";
+import type { Image } from "../../types/Image";
 
 interface ImageCardProps {
-  image;
-  onClick: (image) => void;
+  image: Image;
+  onClick: (image: Image) => void;
 }
 
-const ImageCard = ({ image, onClick }: ImageCardProps) => {
-  const aspectRatio = image.width / image.height;
+const ImageCard: React.FC<ImageCardProps> = ({ image, onClick }) => {
+  const aspectRatio = image.width / image.height; // If Unsplash API provides width/height
 
   return (
     <div

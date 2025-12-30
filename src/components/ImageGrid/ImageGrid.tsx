@@ -1,7 +1,14 @@
+import React from "react";
 import ImageCard from "../ImageCard/ImageCard";
 import "./ImageGrid.css";
+import type { Image } from "../../types/Image";
 
-const ImageGrid = ({ images, onImageClick }) => {
+interface ImageGridProps {
+  images: Image[];
+  onImageClick: (image: Image) => void;
+}
+
+const ImageGrid: React.FC<ImageGridProps> = ({ images, onImageClick }) => {
   return (
     <div className="image-grid">
       {images.map((img) => (
